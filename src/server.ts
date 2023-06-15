@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 function resizeImageMiddleware(req: Request, res: Response, next: NextFunction) {
-    let compressedImageFileSavePath = path.join(__dirname, '../', 'public', 'images', `${new Date().getTime()}-640x480` + ".jpg")
+    let compressedImageFileSavePath = path.join(__dirname, '../', 'public', 'thumbnail', `${new Date().getTime()}-640x480` + ".jpg")
 
     sharp(req.file?.path).resize(640, 480).jpeg({
         quality: 80,
