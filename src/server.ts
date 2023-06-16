@@ -11,6 +11,7 @@ const storage = multer.diskStorage({
         cb(null, file.originalname)
     }
 })
+
 const upload = multer({ storage: storage })
 
 function resizeImageMiddleware(req: Request, res: Response, next: NextFunction) {
@@ -25,14 +26,15 @@ function resizeImageMiddleware(req: Request, res: Response, next: NextFunction) 
         } else {
             res.send(info)
         }
-    })
+        next(); // next() ni chaqirish
+    });
 }
 
-
+////////////////////////////////////////////////////////
+// For example
 import express, { Request, Response, NextFunction } from 'express'
 const app = express()
 
-// For example
 app.post('/upload', upload.single('file'), resizeImageMiddleware)
 
 app.listen(3000, () => {
